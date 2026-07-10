@@ -1,32 +1,22 @@
+# Enrollment Traffic System
+
+A containerized traffic monitoring and routing system built for an enrollment platform using Nginx, Docker, and Prometheus monitoring.
+
+## Features
+* **Reverse Proxy & Routing:** Configured with Nginx supporting SSL (`cert.pem`/`key.pem`).
+* **Containerization:** Full microservices management via `docker-compose.yml`.
+* **System Monitoring:** Core metric collection utilizing Prometheus and Alertmanager.
+* **Notifications:** Slack/Discord automated webhooks integration for real-time monitoring alerts.
+
+## Tech Stack
+* **Frontend:** HTML / TypeScript
+* **DevOps & Infrastructure:** Docker, Nginx, Prometheus, Alertmanager
+
+---
+
+## Getting Started
+
+### 1. Docker Setup
+To spin up the entire system environment, run:
+```bash
 docker compose start
-http://=localhost== open in chrome
-http://localhost:3000===open in chrome
-http://localhost:8080/===open in chrome
-http://localhost:9090/alerts
-http://localhost:9093/#/alerts
-
-docker stop local-cloud-app-1
-docker start local-cloud-app-1
-
-
-docker compose stop
-
-PASSWORD
-9c1PbWWqgKDBDorh525uecKaGZD21FGSoCeR
-
-Spidey Bot
-https://discord.com/api/webhooks/1503631845915492363/av6uZFP6v5qujeEZnUQPuyi8RCTEVBJY7djfHsY7rjawfRfM6mUCPZbFrcozbNe4OpMx
-
-Captain Hook
-https://discord.com/api/webhooks/1503631821634535486/BgJmEQPb14Jy7wLkNNhCk96p8wTuBvnjx3MpskkmTxgy_UFVvwaOdomcWmxLtmHnIUFd
-
-docker compose restart alertmanager
-docker compose restart prometheus
-docker compose restart app
-docker compose restart prometheus alertmanager
-
-Tab 1: Your Frontend (http://localhost) in an Incognito/Private window.
-Tab 2: Grafana Dashboard (http://localhost:3000).
-Tab 3: Prometheus Alerts (http://localhost:9090/alerts).
-Tab 4: Your Discord channel open so the panel can see it.
-
