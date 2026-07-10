@@ -1,0 +1,64 @@
+docker compose down
+docker compose up -d --build --scale app=3
+docker ps
+
+http://localhost.
+docker stop local-cloud-app-1
+docker start local-cloud-app-1
+
+enrollment_requests_total
+
+
+Phase 1: The Clean Slate (Show the Build)
+Always start your presentation with a clean environment to prove you aren't faking the servers.
+
+Open your terminal in VS Code.
+
+Destroy any old, running servers by typing:
+docker compose down
+
+Tell the panel you are now deploying your infrastructure, and type:
+docker compose up -d --build --scale app=3
+
+Run docker ps to show the panel that Nginx, Prometheus, Grafana, Jenkins, and all 3 NestJS containers are successfully running.
+
+Phase 2: The Load Balancer Demo
+This proves your Nginx API Gateway is actively distributing traffic.
+
+Open your browser and go to http://localhost.
+
+Fill out the Student Enrollment form with a fake name and submit it.
+
+Point out the Replica ID at the bottom (e.g., df95019f1b16).
+
+Submit a second and third student.
+
+Emphasize to the panel that the Replica ID keeps changing, proving that Nginx is perfectly balancing the load across your three backend servers.
+
+Phase 3: The High-Availability "Crash" Test
+This is your "wow" moment. You will prove that your system is fault-tolerant.
+
+Bring up your VS Code terminal next to your web browser so the panel can see both.
+
+Tell the panel, "Let's simulate a critical hardware failure where Server 1 crashes."
+
+Run this command: docker stop local-cloud-app-1
+
+Immediately go back to your web browser and submit another enrollment form.
+
+The Result: The enrollment goes through flawlessly! Explain that Nginx instantly detected the crashed server and rerouted the student to the surviving containers without the system ever going offline.
+
+Bring the server back online by running: docker start local-cloud-app-1
+
+Phase 4: The Enterprise Monitoring Demo
+Finally, you will prove that the system is fully monitored, just like AWS or Google Cloud.
+
+Go to your Grafana dashboard at http://localhost:3000.
+
+Make sure your time range in the top right corner is set to Last 5 minutes.
+
+Point to the graph and explain that it is actively tracking the enrollment_requests_total metric scraped by Prometheus.
+
+Go back to your http://localhost tab and rapidly submit 5 more enrollments.
+
+Go back to Grafana, click the Refresh button at the top right, and let the panel watch the live data spike shoot up on the screen.

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Enrollment Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 50px;
+            max-width: 500px;
+            width: 100%;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #1a202c;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #718096;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            letter-spacing: 0.3px;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #2d3748;
+            background-color: #f7fafc;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        input[type="text"]::placeholder {
+            color: #a0aec0;
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23667eea' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            margin-top: 12px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .result-box {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f0f9ff;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-box.success {
+            background: #f0fdf4;
+            border-left-color: #10b981;
+        }
+
+        .result-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        #statusText {
+            font-size: 16px;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .server-tag {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .result-content {
+            margin-bottom: 16px;
+        }
+
+        .result-content:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            button {
+                padding: 12px 16px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Student Enrollment</h1>
+        <p>Enroll in your preferred program today</p>
+    </div>
+
+    <form id="enrollmentForm">
+        <div class="form-group">
+            <label for="studentName">Full Name</label>
+            <input 
+                type="text" 
+                id="studentName" 
+                required 
+                placeholder="Enter your full name"
+                autocomplete="name"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="course">Program of Study</label>
+            <select id="course" required>
+                <option value="">Select a program</option>
+                <option value="BS Information Technology">BS Information Technology</option>
+                <option value="BS Computer Science">BS Computer Science</option>
+                <option value="BS Information Systems">BS Information Systems</option>
+            </select>
+        </div>
+
+        <button type="submit">Complete Enrollment</button>
+    </form>
+
+    <div class="result-box" id="resultBox">
+        <div class="result-content">
+            <div class="result-label">Status</div>
+            <div id="statusText"></div>
+        </div>
+        <div class="result-content">
+            <div class="result-label">Processing Node</div>
+            <div class="server-tag" id="serverText"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('enrollmentForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const nameInput = document.getElementById('studentName').value;
+        const course = document.getElementById('course').value;
+        
+        const normalizedName = nameInput.trim().toUpperCase();
+
+        let enrolledStudents = JSON.parse(localStorage.getItem('enrolledStudents')) || [];
+        
+        if (enrolledStudents.includes(normalizedName)) {
+            alert(`Duplicate Entry: A student named "${nameInput}" has already been enrolled! Only one submission per student is allowed.`);
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/enroll', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: nameInput, course })
+            });
+            
+            const data = await response.json();
+            
+            enrolledStudents.push(normalizedName);
+            localStorage.setItem('enrolledStudents', JSON.stringify(enrolledStudents));
+
+            const resultBox = document.getElementById('resultBox');
+            resultBox.classList.add('success');
+            resultBox.style.display = 'block';
+            document.getElementById('statusText').innerText = data.message || 'Enrollment successful!';
+            document.getElementById('serverText').innerText = "Replica ID: " + (data.serverId || 'N/A');
+            
+        } catch (error) {
+            console.error("Error connecting to server:", error);
+            alert("Error connecting to the cloud servers.");
+        }
+    });
+</script>
+
+</body>
+</html>
